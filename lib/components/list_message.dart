@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lesson_flutter_websocket/entities/message_entity.dart';
 
 import 'message_from.dart';
@@ -14,20 +15,24 @@ class ListMessageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: messages.length,
-      itemBuilder: (context, index) {
-        final message = messages[index];
+    return Observer(
+      builder: (context) {
+        return ListView.builder(
+          itemCount: messages.length,
+          itemBuilder: (context, index) {
+            final message = messages[index];
 
-        if (message.direction == MessageDirection.from) {
-          return MessageFrom(
-            name: message.name,
-            message: message.text,
-          );
-        }
-        return MessageTo(
-          name: message.name,
-          message: message.text,
+            if (message.direction == MessageDirection.from) {
+              return MessageFrom(
+                name: message.name,
+                message: message.text,
+              );
+            }
+            return MessageTo(
+              name: message.name,
+              message: message.text,
+            );
+          },
         );
       },
     );

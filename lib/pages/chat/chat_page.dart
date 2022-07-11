@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lesson_flutter_websocket/components/input_message.dart';
 import 'package:lesson_flutter_websocket/components/list_message.dart';
-import 'package:lesson_flutter_websocket/entities/message_entity.dart';
+import 'package:lesson_flutter_websocket/pages/chat/controllers/chat_controller.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
+
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  ChatController controller = ChatController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,22 +23,11 @@ class ChatPage extends StatelessWidget {
         children: [
           Expanded(
             child: ListMessageView(
-              messages: [
-                Message(
-                  name: 'name',
-                  text: 'text',
-                  direction: MessageDirection.from,
-                ),
-                Message(
-                  name: 'name',
-                  text: 'text',
-                  direction: MessageDirection.to,
-                ),
-              ],
+              messages: controller.messages,
             ),
           ),
           InputMessage(
-            onSendMessage: (message) {},
+            onSendMessage: controller.sendMessage,
           ),
         ],
       ),

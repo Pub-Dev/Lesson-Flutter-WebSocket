@@ -14,6 +14,7 @@ class InputMessage extends StatefulWidget {
 
 class _InputMessageState extends State<InputMessage> {
   String _message = '';
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +28,25 @@ class _InputMessageState extends State<InputMessage> {
         children: [
           Expanded(
             child: TextField(
+              controller: controller,
               maxLines: 1,
               onChanged: (message) {
                 _message = message;
               },
-              onSubmitted: (message) => widget.onSendMessage(message),
+              onSubmitted: (_) => _sendMessage(),
             ),
           ),
           IconButton(
-            onPressed: () => widget.onSendMessage(_message),
+            onPressed: () => _sendMessage(),
             icon: const Icon(Icons.send),
           ),
         ],
       ),
     );
+  }
+
+  void _sendMessage() {
+    widget.onSendMessage(_message);
+    controller.text = '';
   }
 }
