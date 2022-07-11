@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lesson_flutter_websocket/pages/chat_page.dart';
+import 'package:lesson_flutter_websocket/pages/chat/chat_page.dart';
 
 void main() {
   runApp(const ChatApp());
