@@ -10,7 +10,6 @@ class MessageService {
     channel = IOWebSocketChannel.connect(
       'wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV',
       headers: {},
-      protocols: [],
       pingInterval: const Duration(seconds: 5),
     );
   }
@@ -39,7 +38,6 @@ class MessageService {
       },
       onError: (_) async {
         onCloseConnection('error');
-        await Future.delayed(const Duration(seconds: 5));
         _retryConnection(
           onReceive: onReceive,
           onCloseConnection: onCloseConnection,
