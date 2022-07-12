@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:lesson_flutter_websocket/configuration/user_config.dart';
 import 'package:lesson_flutter_websocket/entities/message_entity.dart';
 import 'package:lesson_flutter_websocket/services/message_service.dart';
@@ -29,9 +28,6 @@ abstract class ChatControllerBase with Store {
     messageService.broadcastNotifications(
       onReceive: (message) {
         messages.add(message);
-      },
-      onCloseConnection: (p0) {
-        debugPrint(p0);
       },
     );
   }

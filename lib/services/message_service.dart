@@ -16,19 +16,16 @@ class MessageService {
 
   Future _retryConnection({
     required void Function(Message) onReceive,
-    required void Function(String) onCloseConnection,
   }) async {
     await Future.delayed(const Duration(seconds: 5));
     await initConnection();
     await broadcastNotifications(
       onReceive: onReceive,
-      onCloseConnection: onCloseConnection,
     );
   }
 
   Future broadcastNotifications({
     required void Function(Message) onReceive,
-    required void Function(String) onCloseConnection,
   }) async {
     channel.stream.listen(
       (event) {
@@ -37,18 +34,10 @@ class MessageService {
         onReceive(message);
       },
       onError: (_) async {
-        onCloseConnection('error');
-        _retryConnection(
-          onReceive: onReceive,
-          onCloseConnection: onCloseConnection,
-        );
+        _retryConnection(onReceive: onReceive);
       },
       onDone: () async {
-        onCloseConnection('closed - ${channel.closeCode}');
-        _retryConnection(
-          onReceive: onReceive,
-          onCloseConnection: onCloseConnection,
-        );
+        _retryConnection(onReceive: onReceive);
       },
       cancelOnError: true,
     );
