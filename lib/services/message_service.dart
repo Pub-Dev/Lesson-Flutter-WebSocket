@@ -5,12 +5,10 @@ import 'package:web_socket_channel/io.dart';
 
 class MessageService {
   late IOWebSocketChannel channel;
-  String wsUrl =
-      'wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV';
 
   Future initConnection() async {
     channel = IOWebSocketChannel.connect(
-      wsUrl,
+      'wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV',
       headers: {},
       protocols: [],
       pingInterval: const Duration(seconds: 5),
@@ -35,11 +33,9 @@ class MessageService {
   }) async {
     channel.stream.listen(
       (event) {
-        if (event != 'Hello world!') {
-          final Map<String, dynamic> json = jsonDecode(event);
-          final message = Message.fromJson(json);
-          onReceive(message);
-        }
+        final Map<String, dynamic> json = jsonDecode(event);
+        final message = Message.fromJson(json);
+        onReceive(message);
       },
       onError: (_) async {
         onCloseConnection('error');
@@ -58,10 +54,6 @@ class MessageService {
       },
       cancelOnError: true,
     );
-    // channel.sink.done.then((value) {
-    //   onCloseConnection('error 2');
-    //   initConnection();
-    // });
   }
 
   void sendMessage(Message message) {
