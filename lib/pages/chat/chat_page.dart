@@ -14,6 +14,12 @@ class _ChatPageState extends State<ChatPage> {
   ChatController controller = ChatController();
 
   @override
+  void initState() {
+    controller.init();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

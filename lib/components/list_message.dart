@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:lesson_flutter_websocket/configuration/user_config.dart';
 import 'package:lesson_flutter_websocket/entities/message_entity.dart';
 
 import 'message_from.dart';
@@ -22,7 +23,7 @@ class ListMessageView extends StatelessWidget {
           itemBuilder: (context, index) {
             final message = messages[index];
 
-            if (message.direction == MessageDirection.from) {
+            if (message.name == UserConfig.name) {
               return MessageFrom(
                 name: message.name,
                 message: message.text,

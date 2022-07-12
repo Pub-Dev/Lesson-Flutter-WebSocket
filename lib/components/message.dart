@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../entities/message_entity.dart';
-
 class MessageWidget extends StatelessWidget {
   const MessageWidget({
     Key? key,
@@ -37,6 +35,11 @@ class MessageWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+enum MessageDirection {
+  from,
+  to,
 }
 
 class _MessageContainer extends Container {

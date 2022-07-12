@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lesson_flutter_websocket/components/message.dart';
 
-import '../entities/message_entity.dart';
-
 class MessageFrom extends StatelessWidget {
   const MessageFrom({
     Key? key,

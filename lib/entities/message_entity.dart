@@ -2,15 +2,20 @@ class Message {
   Message({
     required this.name,
     required this.text,
-    required this.direction,
   });
 
   final String name;
   final String text;
-  final MessageDirection direction;
-}
 
-enum MessageDirection {
-  from,
-  to,
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'text': text,
+    };
+  }
+
+  factory Message.fromJson(Map<String, dynamic> json) => Message(
+        name: json['name'],
+        text: json['text'],
+      );
 }
