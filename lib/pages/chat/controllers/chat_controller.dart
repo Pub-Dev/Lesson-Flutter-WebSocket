@@ -23,9 +23,9 @@ abstract class ChatControllerBase with Store {
     messageService.sendMessage(message);
   }
 
-  void init() {
-    messageService.initConnection();
-    messageService.broadcastNotifications(
+  Future init() async {
+    await messageService.initConnection();
+    await messageService.broadcastNotifications(
       onReceive: (message) {
         messages.add(message);
       },
